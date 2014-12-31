@@ -40,3 +40,6 @@ class lib :
 			summation[i] = float(value)/count
 		return summation
 		
+	def setDistanceType(self,funct):
+		self.distanceType = funct
+
