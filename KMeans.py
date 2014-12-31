@@ -12,6 +12,7 @@ class KMEANS(lib) :
 		self.Result = {}    # Result of KMEANS , changed at each iters 
 		self.iters  = iters # iters time
 		self.distanceType = self.cosineSim
+	
 
 	def randomPick(self) :
 		""" 
@@ -64,3 +65,5 @@ if __name__ == "__main__" :
 	obj = KMEANS(2,exampleLst,10)
 	obj.main()
 
+	obj.setDistanceType(obj.euDistance)
+	obj.main()
