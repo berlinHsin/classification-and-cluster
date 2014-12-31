@@ -9,7 +9,9 @@ I hope you could get help by this repo , and I will push more algorithm if time 
 Ref .
 
 KMeans : http://en.wikipedia.org/wiki/K-means_clustering
+
 KNN    : http://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm
+
 Hierarchical clustering : http://en.wikipedia.org/wiki/Hierarchical_clustering
 
 
