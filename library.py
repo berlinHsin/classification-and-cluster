@@ -5,7 +5,7 @@ import collections , time , random
 class lib :
 
 	def cosineSim(self,lstA,lstB) :
-		""" (list , list) -> float """
+		""" (list , list) -> (float,function) """
 		summation = 0.
 		for i , value in enumerate(lstA) :
 			summation += value*lstB[i]
@@ -14,7 +14,7 @@ class lib :
 		# the lambda is for check whether x shorter than y
 
 	def euDistance(self,lstA,lstB):
-		""" (list , list) -> float"""
+		""" (list , list) -> (float,function)"""
 		summation = 0.
 		for i,value in enumerate(lstA) :
 			summation += (value - lstB[i])**2
@@ -39,7 +39,7 @@ class lib :
 		for i , value in enumerate(summation) :
 			summation[i] = float(value)/count
 		return summation
-		
+
 	def setDistanceType(self,funct):
 		self.distanceType = funct
 
