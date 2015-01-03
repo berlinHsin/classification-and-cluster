@@ -8,6 +8,7 @@ class Hierarchical(lib) :
 		self.Datas = Datas
 		self.Group  = {}
 		self.NodeDistance = {} 
+		self.GroupDistance = {}
 		self.distanceType = self.cosineSim
 		self.check        = None
 
@@ -28,16 +29,19 @@ class Hierarchical(lib) :
 				if nearest is None or self.check(nearest,distance) :
 					nearest = distance
 		return nearest
-		
 
-			
-
-	
 	def getGroupData(self) :
 		groupCount = len(self.Group)
 		for gId1 in range(groupCount) :
+			self.GroupDistance.update({gId:{}})
 			for gId2 in range(groupCount) :
 				distance = self.calGroupDistance(gId1,gId2)
+				self.GroupDistance[gId1].update({gId2:distance})
+	
+	def merge(self) :
+		self.getGroupData() # find the distace for each 2 groups 
+		pass 
+
 
 
 	def main(self) :
