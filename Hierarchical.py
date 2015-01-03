@@ -7,37 +7,47 @@ class Hierarchical(lib) :
 		self.K = K
 		self.Datas = Datas
 		self.Group  = {}
-		self.Distance = [] 
+		self.NodeDistance = {} 
 		self.distanceType = self.cosineSim
+		self.check        = None
 
-	def calDistance(self) :
-		for nId , node in enumerate(self.Datas) :
-			distanceDict = {}
-			for nId2 , node2 in enumerate(self.Datas) :
-				if nId != nId2 :
-					distance , check = self.distanceType(nId,nId2)
-					distanceDict.update({nId2:distance})
-			self.Distance.update({nId,distanceDict})
+	def calNodeDistance(self) :
+		nodeCount = len(self.Datas)
+		for node1 in range(nodeCount) :
+			for node2 in range(nodeCount) :
+				distance,check = self.distanceType(node1,node2)
+				self.NodeDistance[node1].update({node2:distance})
+				self.check     = check
+		""" Get distance for each two nodes """
 
-	def calGroupDist(self) :
-		self.Distance = []
-		for gId , group in enumerate(self.Group) :
-			self.calDistance(group)
+	def calGroupDistance(self,gId1,gId2) :
+		nearest = None
+		for node1 in self.Group[gId1] :
+			for node2 in self.Group[gId2] :
+				distance = self.NodeDistance[node1][node2]
+				if nearest is None or self.check(nearest,distance) :
+					nearest = distance
+		return nearest
+		
+
+			
+
 	
-	def merge(self) :
-		self.calGroupDist()
+	def getGroupData(self) :
+		groupCount = len(self.Group)
+		for gId1 in range(groupCount) :
+			for gId2 in range(groupCount) :
+				distance = self.calGroupDistance(gId1,gId2)
+
 
 	def main(self) :
 		for nodeId in range(len(self.Datas)) :
+			self.NodeDistance.update({nodeId:{}})
 			self.Group.update({nodeId:[nodeId]})
-		self.calDistance()
-
-
+		self.calNodeDistance()
 
 		while(len(self.Group)>self.K) :
 			self.merge()
-
-		print(self.Distance)
 
 if __name__ == "__main__" :
 	exampleLst = [ [0,24,5] , [24,1,0] , [0,1,0] , [0,25,2] ]
