@@ -42,8 +42,6 @@ class Hierarchical(lib) :
 		self.getGroupData() # find the distace for each 2 groups 
 		pass 
 
-
-
 	def main(self) :
 		for nodeId in range(len(self.Datas)) :
 			self.NodeDistance.update({nodeId:{}})
