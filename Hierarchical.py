@@ -16,7 +16,7 @@ class Hierarchical(lib) :
 		nodeCount = len(self.Datas)
 		for node1 in range(nodeCount) :
 			for node2 in range(nodeCount) :
-				distance,check = self.distanceType(node1,node2)
+				distance,check = self.distanceType(self.Datas[node1],self.Datas[node2])
 				self.NodeDistance[node1].update({node2:distance})
 				self.check     = check
 		""" Get distance for each two nodes """
@@ -32,15 +32,29 @@ class Hierarchical(lib) :
 
 	def getGroupData(self) :
 		groupCount = len(self.Group)
-		for gId1 in range(groupCount) :
+		for gId in range(groupCount) :
 			self.GroupDistance.update({gId:{}})
 			for gId2 in range(groupCount) :
 				distance = self.calGroupDistance(gId1,gId2)
 				self.GroupDistance[gId1].update({gId2:distance})
+
+	def calMerge(self,gId,rest) : 
+		matchGId,nearest = 0,None
+		for index , group in enumerate(rest) :
+			distance = self.calGroupDistance(gId,index)
+			if nearest is None and distance < nearest :
+				matchGId = index
+		return (matchGId,nearest)
 	
 	def merge(self) :
 		self.getGroupData() # find the distace for each 2 groups 
-		pass 
+		groups = self.Groups
+		for gId , group in enumerate(self.Groups) :
+			flag = True
+			while flag :
+				pass
+
+			
 
 	def main(self) :
 		for nodeId in range(len(self.Datas)) :
