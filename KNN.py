@@ -32,7 +32,7 @@ class KNN(lib) :
 		"""
 		for i,data in enumerate(self.Datas) :
 			distance , check = self.distanceType(data,lst)  
-			self.Result.append((distance,tags[i]))
+			self.Result.append((distance,self.tags[i]))
 		self.sortReverse = check(10,0)
 		# see cosineSim and euDistance in library .
 		# if check(10,0) is True : cosineSim , else : euDistance
